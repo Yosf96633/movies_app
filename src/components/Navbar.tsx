@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import { ToggleMode } from "./theme";
 const Navbar = () => {
   return (
-    <header className=" flex justify-between items-center px-8 border-b py-5 bg-transparent">
+    <header className=" flex justify-between items-center px-8 border-b py-4 bg-transparent">
        <h1 className=" text-3xl cursor-pointer font-bold"> Movies</h1>
       <nav className=" flex space-x-8 text-lg ">
         <Link href={"/"}>Link1</Link>
