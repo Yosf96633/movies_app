@@ -16,9 +16,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { LoaderCircle } from "lucide-react";
+import { LoaderCircle, X } from "lucide-react";
 import { redirect } from "next/navigation";
-import { Promise } from "mongoose";
+import Link from "next/link";
 const page = () => {
   const [isShow, setIsShow] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -46,9 +46,21 @@ const page = () => {
     });
     const result = await response.json();
     if (result?.success) {
-      toast(result?.message);
+      toast(result?.message , {
+        action:{
+          label:<X className=" bg-transparent"/>,
+          onClick:()=>toast.dismiss(),
+         }
+      });
       redirect("/login");
     }
+    toast(result?.message , {
+      action:{
+        label:<X className=" bg-transparent"/>,
+        onClick:()=>toast.dismiss(),
+       }
+    });
+    setIsLoading(false)
   }
   useEffect(() => {
     return () => {
@@ -60,7 +72,7 @@ const page = () => {
     <div className=" h-screen flex justify-center items-center">
       <div className="max-w-md w-full px-6 space-y-4 py-4 border rounded-2xl">
         <div className="flex flex-col items-center text-center">
-          <h1 className="text-2xl font-bold">Welcome</h1>
+          <h1 className="text-3xl font-bold">Welcome</h1>
           <p className="text-balance text-muted-foreground">
             Create an account to get start
           </p>
@@ -101,7 +113,7 @@ const page = () => {
                   <FormItem>
                     <FormLabel>Password</FormLabel>
                     <FormControl>
-                      <Input placeholder="********" {...field} />
+                      <Input type="password" placeholder="********" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -126,6 +138,14 @@ const page = () => {
             </form>
           </Form>
         </div>
+        <div>
+          <p className=" text-center">
+            Already have an account?{" "}
+            <Link href={"/login"} className=" underline">
+              Login
+            </Link>
+          </p>
+        </div>
         <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
           <span className="relative z-10 bg-background px-2 text-muted-foreground">
             Or continue with
@@ -134,7 +154,7 @@ const page = () => {
         <div className="">
           <Button
             onClick={() => {
-              signIn("google" , {callbackUrl:"/" , redirect:false});
+              signIn("google", { callbackUrl: "/", redirect: false });
             }}
             variant="outline"
             className="w-full cursor-pointer"

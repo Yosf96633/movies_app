@@ -1,7 +1,11 @@
 import "next-auth";
 import { DefaultSession } from "next-auth";
+import {Profile as DefaultProfile} from "next-auth"
 
 declare module "next-auth" {
+  interface Profile extends DefaultProfile{
+    picture?: string
+  }
   interface User {
      id?:string
     _id?: string;
