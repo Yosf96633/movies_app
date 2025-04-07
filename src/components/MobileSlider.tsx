@@ -14,15 +14,15 @@ export function MobileSidebar() {
   const handleNavClick = () => setOpen(false); // close sheet
 
   return (
-    <div className="md:hidden">
+    <div className="">
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <button className="p-2">
-            <Menu className="cursor-pointer" size={30} />
+            <Menu className="cursor-pointer mr-3" size={30} />
           </button>
         </SheetTrigger>
 
-        <SheetContent side="right" className="p-6">
+        <SheetContent side="left" className="p-6">
           <div className=" pt-14">
           {status === "authenticated" && (
             <div className="flex flex-col items-center space-y-2 pt-8">
@@ -35,22 +35,22 @@ export function MobileSidebar() {
           )}
 
           <nav className="mt-10 flex flex-col space-y-6 text-lg font-light">
-            <Link href="/" onClick={handleNavClick} className="flex items-center space-x-3 hover:text-red-500 transition-colors">
+            <Link href="/" onClick={handleNavClick} className="flex items-center space-x-3 hover:text-[#58EA80] transition-colors">
               <Home size={20} />
               <span>Home</span>
             </Link>
 
-            <Link href="/movies" onClick={handleNavClick} className="flex items-center space-x-3 hover:text-red-500 transition-colors">
+            <Link href="/movies" onClick={handleNavClick} className="flex items-center space-x-3 hover:text-[#58EA80]  transition-colors">
               <Film size={20} />
               <span>Movies</span>
             </Link>
 
-            <Link href="/favorites" onClick={handleNavClick} className="flex items-center space-x-3 hover:text-red-500 transition-colors">
+            <Link href="/favorites" onClick={handleNavClick} className="flex items-center space-x-3 hover:text-[#58EA80]  transition-colors">
               <Bookmark size={20} />
               <span>Favorites</span>
             </Link>
 
-            <Link href="/top-rated" onClick={handleNavClick} className="flex items-center space-x-3 hover:text-red-500 transition-colors">
+            <Link href="/top-rated" onClick={handleNavClick} className="flex items-center space-x-3 hover:text-[#58EA80]  transition-colors">
               <Star size={20} />
               <span>Top Rated</span>
             </Link>
@@ -61,7 +61,7 @@ export function MobileSidebar() {
                   handleNavClick();
                   signOut();
                 }}
-                className="flex items-center space-x-3 text-left hover:text-red-500 transition-colors"
+                className="flex items-center space-x-3 text-left hover:text-[#58EA80] transition-colors"
               >
                 <LogOut size={20} />
                 <span>Sign Out</span>

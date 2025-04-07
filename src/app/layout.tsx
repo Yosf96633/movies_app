@@ -5,9 +5,9 @@ import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
 import AuthProvider from "@/context/AuthProvider";
 export const metadata: Metadata = {
-  title: "Movie app",
+  title: "Movie, Watch Movies Online, Watch TV Shows Online, free movie - Moviebox",
   icons: {
-    icon: "/logo.png",
+    icon: "/favicon.svg",
   },
 };
 

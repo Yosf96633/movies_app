@@ -7,18 +7,21 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import SignOutButton from "./SignOutButton";
 import { MobileSidebar } from "./MobileSlider";
+import Image from "next/image";
+import { Input } from "./ui/input";
+import NavInput from "./NavInput";
 const Navbar = async () => {
   const session = await getServerSession(authOptions);
   return (
-    <header className=" flex justify-between items-center px-8 max-md:px-4 border-b py-4 bg-transparent">
-      <h1 className=" text-3xl max-md:text-2xl cursor-pointer font-bold max-md:font-medium"> Movies</h1>
-      <nav className=" flex space-x-8 text-sm max-md:hidden">
-        <Link href={"/"}>Link1</Link>
-        <Link href={"/"}>Link1</Link>
-        <Link href={"/"}>Link1</Link>
-        <Link href={"/"}>Link1</Link>
-        <Link href={"/"}>Link1</Link>
-      </nav>
+    <header className=" flex justify-between items-center px-5 max-md:px-3 border-b py-2 bg-transparent">
+      <div className=" flex space-x-2 items-center">
+      <MobileSidebar/>
+          <Image src='/favicon.svg' width={35} height={20} alt="favicon"/>
+          <h1 className=" text-2xl max-md:text-xl cursor-pointer font-bold max-md:font-medium"> Movies</h1>
+      </div>
+       <div className=" w-[50%]">
+           <NavInput/>
+       </div>
       <div className=" flex space-x-3.5 items-center max-md:hidden">
         <div className=" flex space-x-4 items-center">
           <ToggleMode />
@@ -43,10 +46,6 @@ const Navbar = async () => {
             <SignOutButton />
           </div>
         )}
-      </div>
-      <div className=" md:hidden flex  items-center flex-row-reverse">
-         <div className=" ml-3"> <MobileSidebar/></div>
-       <ToggleMode/>
       </div>
     </header>
   );
