@@ -5,15 +5,13 @@ import { ToggleMode } from "./theme";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { signOut } from "next-auth/react";
 import SignOutButton from "./SignOutButton";
-import { Menu } from "lucide-react";
 import { MobileSidebar } from "./MobileSlider";
 const Navbar = async () => {
   const session = await getServerSession(authOptions);
   return (
-    <header className=" flex justify-between items-center px-8 border-b py-4 bg-transparent">
-      <h1 className=" text-3xl cursor-pointer font-bold"> Movies</h1>
+    <header className=" flex justify-between items-center px-8 max-md:px-4 border-b py-4 bg-transparent">
+      <h1 className=" text-3xl max-md:text-2xl cursor-pointer font-bold max-md:font-medium"> Movies</h1>
       <nav className=" flex space-x-8 text-sm max-md:hidden">
         <Link href={"/"}>Link1</Link>
         <Link href={"/"}>Link1</Link>
@@ -46,8 +44,9 @@ const Navbar = async () => {
           </div>
         )}
       </div>
-      <div className=" md:hidden">
-       <MobileSidebar/>
+      <div className=" md:hidden flex  items-center flex-row-reverse">
+         <div className=" ml-3"> <MobileSidebar/></div>
+       <ToggleMode/>
       </div>
     </header>
   );
