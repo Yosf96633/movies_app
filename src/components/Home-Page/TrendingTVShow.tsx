@@ -35,7 +35,7 @@ const TrendingTVShow = async () => {
     <div className=" flex flex-col px-6 py-6 space-y-6">
       <h1 className="  md:text-4xl text-3xl font-extrabold">Trending TV Shows</h1>
       <div className=" flex overflow-x-auto w-full cursor-pointer py-4">
-            {data.map((x:TVShow , i:number)=><div className="w-[150px] shrink-0 mr-4 relative">
+            {data.map((x:TVShow , i:number)=><div  key={i} className="w-[150px] shrink-0 mr-4 relative">
   <div className="relative rounded-md overflow-hidden shadow-md">
     <img
       src={`${process.env.IMAGE_BASE_URL as string}/w200${x.poster_path}`}
