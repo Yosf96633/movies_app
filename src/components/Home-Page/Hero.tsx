@@ -9,9 +9,9 @@ const Hero = async () => {
     <div className=" relative h-[80vh] w-full">
       <div className=" absolute z-0 w-full h-full bg-[url('/Hero_image.webp')] bg-center"
       />
-      <div className="  absolute z-0 w-full h-full flex flex-col pt-32 md:pl-16 pl-6">
-           <h1 className=" text-7xl text-white font-extrabold">Hi, {session?.user.name ? session.user.name : "There" }</h1>
-           <p className=" text-3xl font-light text-white md:w-[70%] w-[90%]">  Discover your next favorite <span className=" text-[#58EA80] text-5xl font-extrabold">Movies</span>. Browse trending titles, explore genres, and keep track of what you love — all in one place.           </p>
+      <div className="  absolute z-0 w-full h-full flex flex-col pt-40 space-y-5 md:pl-16 pl-6">
+           <h1 className=" text-7xl text-white max-md:text-5xl font-extrabold">Hi, {session?.user.name ? session.user.name : "There" }</h1>
+           <p className=" text-3xl max-md:text-2xl font-light text-white md:w-[70%] w-[90%]">  Discover your next favorite <span className=" text-[#58EA80] text-5xl max-md:text-3xl font-extrabold">Movies</span>. Browse trending titles, explore genres, and keep track of what you love — all in one place.           </p>
            <Button className=" w-fit bg-white p-6 text-lg cursor-pointer mt-4 text-black">Call to Action</Button>
       </div>
 

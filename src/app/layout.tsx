@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
+      <body className=" relative">
       
       <AuthProvider>
       <ThemeProvider
@@ -27,7 +27,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-         <Navbar />
+           <div className=" sticky top-0 z-10">
+           <Navbar/>
+           </div>
             {children}
             <Toaster />
         </ThemeProvider>

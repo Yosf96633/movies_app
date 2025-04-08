@@ -34,7 +34,7 @@ export function MobileSidebar() {
             </div>
           )}
 
-          <nav className="mt-10 flex flex-col space-y-6 text-lg font-light">
+          <nav className="mt-10 flex flex-col items-center space-y-6 text-2xl font-light">
             <Link href="/" onClick={handleNavClick} className="flex items-center space-x-3 hover:text-[#58EA80] transition-colors">
               <Home size={20} />
               <span>Home</span>

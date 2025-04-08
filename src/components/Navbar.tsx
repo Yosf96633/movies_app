@@ -13,7 +13,7 @@ import NavInput from "./NavInput";
 const Navbar = async () => {
   const session = await getServerSession(authOptions);
   return (
-    <header className=" flex justify-between items-center px-5 max-md:px-3 border-b py-2 bg-transparent">
+    <header className=" flex justify-between items-center px-5 max-md:px-3 border-b py-2 backdrop-blur-2xl">
       <div className=" flex space-x-2 items-center">
       <MobileSidebar/>
           <Image src='/favicon.svg' width={35} height={20} alt="favicon"/>

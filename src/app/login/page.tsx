@@ -59,7 +59,7 @@ const page = () => {
     };
   }, []);
   return (
-    <div className=" h-screen flex justify-center items-center">
+    <div className=" h-screen max-md:h-[85vh] flex justify-center px-3 items-center">
       <div className="max-w-md w-full px-6 space-y-4 py-4 border rounded-2xl">
         <div className="flex flex-col items-center text-center">
           <h1 className="text-3xl font-bold">Welcome back</h1>
