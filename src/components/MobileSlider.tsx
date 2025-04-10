@@ -14,7 +14,7 @@ export function MobileSidebar() {
   const handleNavClick = () => setOpen(false); // close sheet
 
   return (
-    <div className="">
+    <div className="relative">
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild>
           <button className="p-2">
@@ -24,15 +24,6 @@ export function MobileSidebar() {
 
         <SheetContent side="left" className="p-6">
           <div className=" pt-14">
-          {status === "authenticated" && (
-            <div className="flex flex-col items-center space-y-2 pt-8">
-              <Avatar className="h-20 w-20">
-                <AvatarImage src={session.user.image || ""} />
-                <AvatarFallback>{session.user.name?.charAt(0)}</AvatarFallback>
-              </Avatar>
-              <h1 className="text-xl font-semibold">{session.user.name}</h1>
-            </div>
-          )}
 
           <nav className="mt-10 flex flex-col items-center space-y-6 text-2xl font-light">
             <Link href="/" onClick={handleNavClick} className="flex items-center space-x-3 hover:text-[#58EA80] transition-colors">
@@ -81,6 +72,15 @@ export function MobileSidebar() {
               </Link>
             </div>}
           </div>
+          {status === "authenticated" && (
+            <div className="flex items-center absolute bottom-0 space-x-2 py-8">
+              <Avatar className="h-14 w-14">
+                <AvatarImage src={session.user.image || ""} />
+                <AvatarFallback>{session.user.name?.charAt(0)}</AvatarFallback>
+              </Avatar>
+              <h1 className="text-lg font-medium">{session.user.email}</h1>
+            </div>
+          )}
         </SheetContent>
       </Sheet>
     </div>

@@ -4,6 +4,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import Navbar from "@/components/Navbar";
 import AuthProvider from "@/context/AuthProvider";
+import Footer from "@/components/Footer";
 export const metadata: Metadata = {
   title: "Movie, Watch Movies Online, Watch TV Shows Online, free movie - Moviebox",
   icons: {
@@ -31,6 +32,7 @@ export default function RootLayout({
            <Navbar/>
            </div>
             {children}
+            <Footer/>
             <Toaster />
         </ThemeProvider>
       </AuthProvider>

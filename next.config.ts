@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
   images:{
     domains:[
       'lh3.googleusercontent.com',
-      'https://image.tmbd.org/t/p'
+      'image.tmdb.org'
     ]
     
   }
