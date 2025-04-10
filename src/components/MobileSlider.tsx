@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Menu, Home, Film, Star, Bookmark, LogOut } from "lucide-react";
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
+import { ToggleMode } from "./theme";
 
 export function MobileSidebar() {
   const { data: session, status } = useSession();
@@ -74,11 +75,14 @@ export function MobileSidebar() {
           </div>
           {status === "authenticated" && (
             <div className="flex items-center absolute bottom-0 space-x-2 py-8">
-              <Avatar className="h-14 w-14">
+              <Avatar className="h-10 w-10">
                 <AvatarImage src={session.user.image || ""} />
                 <AvatarFallback>{session.user.name?.charAt(0)}</AvatarFallback>
               </Avatar>
               <h1 className="text-lg font-medium">{session.user.email}</h1>
+              <div className="md:hidden self-end">
+                <ToggleMode/>
+              </div>
             </div>
           )}
         </SheetContent>

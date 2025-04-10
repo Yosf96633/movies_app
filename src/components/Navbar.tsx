@@ -16,8 +16,8 @@ const Navbar = async () => {
     <header className=" flex justify-between items-center px-5 max-md:px-3 border-b py-2 backdrop-blur-2xl">
       <div className=" flex space-x-2 items-center">
       <MobileSidebar/>
-          <Image src='/favicon.svg' width={35} height={20} alt="favicon"/>
-          <h1 className=" text-2xl max-md:text-xl cursor-pointer font-bold max-md:font-medium"> Movies</h1>
+         <Link href={'/'} className="flex space-x-2 items-center "> <Image src='/favicon.svg' width={35} height={20} alt="favicon"/>
+         <h1 className=" text-2xl max-md:text-xl cursor-pointer font-bold max-md:font-medium"> Movies</h1></Link>
       </div>
        <div className=" w-[50%]">
            <NavInput/>

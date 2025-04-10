@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
  interface TvShow {
     adult: boolean;
@@ -35,7 +36,8 @@ const AiringTVShow = async () => {
       <div className=" flex overflow-x-auto w-full cursor-pointer py-4">
         {data.map((x: TvShow, i: number) => (
           <div key={i} className="w-[150px] shrink-0 mr-4 relative">
-            <div className="relative rounded-md overflow-hidden shadow-md">
+           <Link href={`/tvshows/${x.id}`}>
+           <div className="relative rounded-md overflow-hidden shadow-md">
               <img
                 src={`${process.env.IMAGE_BASE_URL as string}/w200${
                   x.poster_path
@@ -47,6 +49,7 @@ const AiringTVShow = async () => {
                 {x.vote_average}
               </span>
             </div>
+           </Link>
             <p className="mt-2 text-xl max-md:text-lg font-bold truncate">
               {x.name}
             </p>

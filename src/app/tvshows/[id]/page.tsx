@@ -1,57 +1,115 @@
 import React from "react";
-interface Movie {
+interface Creator {
+  id: number;
+  credit_id: string;
+  name: string;
+  original_name: string;
+  gender: number;
+  profile_path: string | null;
+}
+
+interface Genre {
+  id: number;
+  name: string;
+}
+
+interface Network {
+  id: number;
+  logo_path: string | null;
+  name: string;
+  origin_country: string;
+}
+
+interface ProductionCompany {
+  id: number;
+  logo_path: string | null;
+  name: string;
+  origin_country: string;
+}
+
+interface ProductionCountry {
+  iso_3166_1: string;
+  name: string;
+}
+
+interface Season {
+  air_date: string;
+  episode_count: number;
+  id: number;
+  name: string;
+  overview: string;
+  poster_path: string | null;
+  season_number: number;
+  vote_average: number;
+}
+
+interface Episode {
+  id: number;
+  name: string;
+  overview: string;
+  vote_average: number;
+  vote_count: number;
+  air_date: string;
+  episode_number: number;
+  episode_type: string;
+  production_code: string;
+  runtime: number;
+  season_number: number;
+  show_id: number;
+  still_path: string | null;
+}
+
+interface TVShow {
   adult: boolean;
   backdrop_path: string | null;
-  belongs_to_collection: any | null;
-  budget: number;
-  genres: { id: number; name: string }[];
+  created_by: Creator[];
+  episode_run_time: number[];
+  first_air_date: string;
+  genres: Genre[];
   homepage: string;
+  tagline: string;
   id: number;
-  imdb_id: string;
+  in_production: boolean;
+  languages: string[];
+  last_air_date: string;
+  last_episode_to_air: Episode;
+  name: string;
+  next_episode_to_air: Episode | null;
+  networks: Network[];
+  number_of_episodes: number;
+  number_of_seasons: number;
   origin_country: string[];
   original_language: string;
-  original_title: string;
+  original_name: string;
   overview: string;
   popularity: number;
   poster_path: string | null;
-  production_companies: {
-    id: number;
-    logo_path: string | null;
-    name: string;
-    origin_country: string;
-  }[];
-  production_countries: {
-    iso_3166_1: string;
-    name: string;
-  }[];
-  release_date: string;
-  revenue: number;
-  runtime: number;
+  production_companies: ProductionCompany[];
+  production_countries: ProductionCountry[];
+  seasons: Season[];
+  vote_average: number;
+  vote_count: number;
+  status: string;
   spoken_languages: {
     english_name: string;
     iso_639_1: string;
     name: string;
   }[];
-  status: string;
-  tagline: string;
-  title: string;
-  video: boolean;
-  vote_average: number;
-  vote_count: number;
 }
 
-const page = async ({ params }: { params: Promise<{ id: string }> }) => {
-  const { id } = await params;
+const page = async ({ params }: { params: { id: string } }) => {
+  const { id } =  params;
   const response = await fetch(
-    `${process.env.TMBD_BASE_URL as string}/movie/${id}?api_key=${
+    `${process.env.TMBD_BASE_URL as string}/tv/${id}?api_key=${
       process.env.API_KEY
-    }`,{
-      next:{
-        revalidate:86400
-      }
+    }&language=en-US`,
+    {
+      next: {
+        revalidate: 86400,
+      },
     }
   );
-  const data: Movie = await response.json();
+  const data: TVShow = await response.json();
   return (
     <div className="relative h-[100vh] max-md:h-[85vh] md:p-12 p-4 z-0">
       <div
@@ -64,7 +122,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
       <div className="relative flex flex-col top-24 z-20 text-white gap-6">
         {/* Title */}
         <h1 className="text-5xl md:text-6xl font-extrabold drop-shadow-md">
-          {data.title}
+          {data.name}
         </h1>
 
         {/* Tagline */}
@@ -82,13 +140,19 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
         {/* Meta Info */}
         <div className="flex items-center gap-4 flex-wrap text-sm text-gray-300">
           <span>
-            <strong>Release:</strong> {data.release_date}
+            <strong>First Air Date:</strong> {data.first_air_date}
           </span>
           <span>
-            <strong>Runtime:</strong> {data.runtime} min
+            <strong>Last Air Date:</strong> {data.last_air_date}
           </span>
           <span>
-            <strong>Rating:</strong> ⭐ {data.vote_average} / 10 (
+            <strong>Seasons:</strong> {data.number_of_seasons}
+          </span>
+          <span>
+            <strong>Episodes:</strong> {data.number_of_episodes}
+          </span>
+          <span>
+            <strong>Rating:</strong> ⭐ {data.vote_count} / 10 (
             {data.vote_count} votes)
           </span>
           <span>
@@ -105,7 +169,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
 
         {/* Genres */}
         <div className="flex flex-wrap gap-2">
-          {data.genres?.map((genre) => (
+          {data.genres.map((genre) => (
             <span
               key={genre.id}
               className="bg-white/10 border border-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm text-white"
@@ -114,6 +178,18 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
             </span>
           ))}
         </div>
+
+        {/* Networks */}
+        {data.networks?.length > 0 && (
+          <div className="flex items-center gap-4 flex-wrap text-sm text-gray-400">
+            <strong>Networks:</strong>
+            {data.networks.map((network) => (
+              <span key={network.id} className="italic">
+                {network.name}
+              </span>
+            ))}
+          </div>
+        )}
 
         {/* Production Companies */}
         <div className="flex items-center gap-4 flex-wrap text-sm text-gray-400">
@@ -125,7 +201,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
           ))}
         </div>
 
-        {/* Action Button */}
+        {/* Official Website */}
         {data.homepage && (
           <a
             href={data.homepage}

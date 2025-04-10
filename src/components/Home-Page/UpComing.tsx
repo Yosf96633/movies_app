@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 export interface Movie {
     adult: boolean;
@@ -36,6 +37,7 @@ const UpComing = async () => {
       <div className=" flex overflow-x-auto w-full cursor-pointer py-4">
         {data.map((x: Movie, i: number) => (
           <div  key={i} className="w-[150px] shrink-0 mr-4 relative">
+            <Link href={`/movies/${x.id}`}> 
             <div className="relative rounded-md overflow-hidden shadow-md">
               <img
                 src={`${process.env.IMAGE_BASE_URL as string}/w200${
@@ -48,6 +50,7 @@ const UpComing = async () => {
                 {x.vote_average}
               </span>
             </div>
+            </Link>
             <p className="mt-2 text-xl max-md:text-lg font-bold truncate">
               {x.title}
             </p>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 interface TVShow {
     backdrop_path: string;
@@ -36,7 +37,7 @@ const TrendingTVShow = async () => {
       <h1 className="  md:text-4xl text-3xl font-extrabold">Trending TV Shows</h1>
       <div className=" flex overflow-x-auto w-full cursor-pointer py-4">
             {data.map((x:TVShow , i:number)=><div  key={i} className="w-[150px] shrink-0 mr-4 relative">
-  <div className="relative rounded-md overflow-hidden shadow-md">
+           <Link href={`/tvshows/${x.id}`}><div className="relative rounded-md overflow-hidden shadow-md">
     <img
       src={`${process.env.IMAGE_BASE_URL as string}/w200${x.poster_path}`}
       alt="Movie Poster"
@@ -45,7 +46,7 @@ const TrendingTVShow = async () => {
     <span className="absolute bottom-2 right-2 bg-black/5 text-yellow-500 text-sm font-extrabold px-1.5 py-0.5 rounded">
       {x.vote_average}
     </span>
-  </div>
+  </div></Link>
   <p className="mt-2 text-xl max-md:text-lg font-bold truncate">{x.name}</p>
 </div>)}
       </div>
