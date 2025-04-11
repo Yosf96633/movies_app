@@ -37,7 +37,7 @@ export function MobileSidebar() {
               <span>Movies</span>
             </Link>
 
-            <Link href="/favorites" onClick={handleNavClick} className="flex items-center space-x-3 hover:text-[#58EA80]  transition-colors">
+            <Link href="/favorite" onClick={handleNavClick} className="flex items-center space-x-3 hover:text-[#58EA80]  transition-colors">
               <Bookmark size={20} />
               <span>Favorites</span>
             </Link>
@@ -74,7 +74,7 @@ export function MobileSidebar() {
             </div>}
           </div>
           {status === "authenticated" && (
-            <div className="flex items-center absolute bottom-0 space-x-2 py-8">
+            <div className="flex items-center absolute bottom-0 space-x-0.5 py-8">
               <Avatar className="h-10 w-10">
                 <AvatarImage src={session.user.image || ""} />
                 <AvatarFallback>{session.user.name?.charAt(0)}</AvatarFallback>

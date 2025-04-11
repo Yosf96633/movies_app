@@ -97,8 +97,8 @@ interface TVShow {
   }[];
 }
 
-const page = async ({ params }: { params: { id: string } }) => {
-  const { id } =  params;
+const page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const { id } =  await params;
   const response = await fetch(
     `${process.env.TMBD_BASE_URL as string}/tv/${id}?api_key=${
       process.env.API_KEY

@@ -14,9 +14,9 @@ const Navbar = async () => {
   const session = await getServerSession(authOptions);
   return (
     <header className=" flex justify-between items-center px-5 max-md:px-3 border-b py-2 backdrop-blur-2xl">
-      <div className=" flex space-x-2 items-center">
+      <div className=" flex items-center">
       <MobileSidebar/>
-         <Link href={'/'} className="flex space-x-2 items-center "> <Image src='/favicon.svg' width={35} height={20} alt="favicon"/>
+         <Link href={'/'} className="flex space-x-2 items-center "> <Image src='/favicon.svg' width={30} height={15} alt="favicon"/>
          <h1 className=" text-2xl max-md:text-xl cursor-pointer font-bold max-md:font-medium"> Movies</h1></Link>
       </div>
        <div className=" w-[50%]">

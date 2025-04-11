@@ -4,7 +4,6 @@ import TrendingMovies from '@/components/Home-Page/TrendingMovies';
 import TrendingTVShow from '@/components/Home-Page/TrendingTVShow';
 import UpComing from '@/components/Home-Page/UpComing';
 import AiringTVShow from '@/components/Home-Page/OnAirTVShows';
-import News from '@/components/Home-Page/News';
 const page = async () => {   
     return (
       <div className="">
@@ -13,7 +12,7 @@ const page = async () => {
        <TrendingTVShow/>
        <UpComing/>
        <AiringTVShow/>
-       <News/>
+      
       </div>
     );
   }

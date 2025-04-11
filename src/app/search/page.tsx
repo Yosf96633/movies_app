@@ -54,13 +54,13 @@ const page = async ({
       <p className=" text-center text-2xl font-semibold py-4">
         Searched for: {q}
       </p>
-      <div className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 px-4">
+      <div className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4  gap-16 max-md:gap-6 px-4">
         {data.map((x: Movie, i: number) => (
           <div key={i} className="md:w-[250px] w-[150px] shrink-0 relative">
             <Link href={`/movies/${x.id}`}>
               <div className="relative rounded-md overflow-hidden shadow-md">
                 <img
-                  src={`${process.env.IMAGE_BASE_URL}/w200${x.poster_path}`}
+                  src={ x.poster_path ? `${process.env.IMAGE_BASE_URL}/w200${x.poster_path}` : `https://dummyjson.com/image/200x300/282828/ffffff?text=Poster+not+available`}
                   alt="Movie Poster"
                   className="w-full h-auto object-cover"
                 />
