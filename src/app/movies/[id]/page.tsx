@@ -1,3 +1,7 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import { FavButton } from "@/components/FavButton";
+import { getServerSession } from "next-auth";
+import Link from "next/link";
 import React from "react";
 interface Movie {
   adult: boolean;
@@ -42,6 +46,7 @@ interface Movie {
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
+  const session = await getServerSession(authOptions);
   const response = await fetch(
     `${process.env.TMBD_BASE_URL as string}/movie/${id}?api_key=${
       process.env.API_KEY
@@ -126,7 +131,8 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
         </div>
 
         {/* Action Button */}
-        {data.homepage && (
+       <div className=" flex space-x-4 items-center">
+       {data.homepage && (
           <a
             href={data.homepage}
             target="_blank"
@@ -136,6 +142,8 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
             Visit Official Page
           </a>
         )}
+         { session?.user ?  <FavButton tmdbID={data.id.toString()} mediaType="movie"  title={data.title} posterPath={data.poster_path} /> : <Link className=" underline px-3 py-2" href={'/login'}>Login to add movies in favorite list</Link>}
+       </div>
       </div>
     </div>
   );

@@ -74,7 +74,7 @@ export function MobileSidebar() {
             </div>}
           </div>
           {status === "authenticated" && (
-            <div className="flex items-center absolute bottom-0 space-x-0.5 py-8">
+            <div className="flex items-center absolute bottom-0 space-x-2 py-8">
               <Avatar className="h-10 w-10">
                 <AvatarImage src={session.user.image || ""} />
                 <AvatarFallback>{session.user.name?.charAt(0)}</AvatarFallback>
