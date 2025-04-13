@@ -50,10 +50,11 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const response = await fetch(
     `${process.env.TMBD_BASE_URL as string}/movie/${id}?api_key=${
       process.env.API_KEY
-    }`,{
-      next:{
-        revalidate:86400
-      }
+    }`,
+    {
+      next: {
+        revalidate: 86400,
+      },
     }
   );
   const data: Movie = await response.json();
@@ -131,19 +132,30 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
         </div>
 
         {/* Action Button */}
-       <div className=" flex space-x-4 items-center">
-       {data.homepage && (
-          <a
-            href={data.homepage}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 w-fit bg-white text-black font-semibold px-3 py-2 rounded-2xl hover:bg-gray-200 transition"
-          >
-            Visit Official Page
-          </a>
-        )}
-         { session?.user ?  <FavButton tmdbID={data.id.toString()} mediaType="movie"  title={data.title} posterPath={data.poster_path} /> : <Link className=" underline px-3 py-2" href={'/login'}>Login to add movies in favorite list</Link>}
-       </div>
+        <div className=" flex space-x-4 items-center">
+          {data.homepage && (
+            <a
+              href={data.homepage}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 w-fit bg-white text-black font-semibold px-3 py-2 rounded-2xl hover:bg-gray-200 transition"
+            >
+              Visit Official Page
+            </a>
+          )}
+          {session?.user ? (
+            <FavButton
+              tmdbID={data.id.toString()}
+              mediaType="movie"
+              title={data.title}
+              posterPath={data.poster_path}
+            />
+          ) : (
+            <Link className=" underline px-3 py-2" href={"/login"}>
+              Login to add movies in favorite list
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );

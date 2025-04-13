@@ -1,3 +1,7 @@
+import { authOptions } from "@/app/api/auth/[...nextauth]/authOptions";
+import { FavButton } from "@/components/FavButton";
+import { getServerSession } from "next-auth";
+import Link from "next/link";
 import React from "react";
 interface Creator {
   id: number;
@@ -98,6 +102,7 @@ interface TVShow {
 }
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
+  const session = await getServerSession(authOptions)
   const { id } =  await params;
   const response = await fetch(
     `${process.env.TMBD_BASE_URL as string}/tv/${id}?api_key=${
@@ -202,16 +207,30 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
         </div>
 
         {/* Official Website */}
-        {data.homepage && (
-          <a
-            href={data.homepage}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 w-fit bg-white text-black font-semibold px-3 py-2 rounded-2xl hover:bg-gray-200 transition"
-          >
-            Visit Official Page
-          </a>
-        )}
+        <div className=" flex space-x-4 items-center">
+          {data.homepage && (
+            <a
+              href={data.homepage}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 w-fit bg-white text-black font-semibold px-3 py-2 rounded-2xl hover:bg-gray-200 transition"
+            >
+              Visit Official Page
+            </a>
+          )}
+          {session?.user ? (
+            <FavButton
+              tmdbID={data.id.toString()}
+              mediaType="tv"
+              title={data.name}
+              posterPath={data.poster_path}
+            />
+          ) : (
+            <Link className=" underline px-3 py-2" href={"/login"}>
+              Login to add movies in favorite list
+            </Link>
+          )}
+        </div>
       </div>
     </div>
   );
