@@ -12,7 +12,7 @@ const page = async () => {
   }});
   const result = await response.json();
   const data: Data[] = result?.data;
-
+   console.log(data)
   return (
     <div className=" h-screen py-14 text-center font-bold text-5xl">
       Favorite

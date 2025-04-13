@@ -29,6 +29,6 @@ export const useFavoriteStore = create<FavoriteStore>((set ,get)=>({
           get().favorite = get().favorite.filter((_ , i)=> !(tmdbID===_.tmdbID && mediaType ===_.mediaType))
      },
      checkFavorite(tmdbID, mediaType) {
-           return get().favorite.some((_)=>(_.mediaType === mediaType && _.tmdbID ===tmdbID ))
+           return get().favorite?.some((_)=>(_.mediaType === mediaType && _.tmdbID ===tmdbID ))
      },
 }))
