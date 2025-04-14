@@ -102,7 +102,7 @@ export const Favorite = ({ items }: { items: Data[] }) => {
 
               {/* Hover overlay with action button */}
               <Link
-                href={`/details/${item.mediaType}/${item.tmdbID}`}
+                href={`/movies/${item.tmdbID}`}
                 className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300"
               >
                 <Button className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
