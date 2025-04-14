@@ -62,11 +62,12 @@ export const authOptions: NextAuthOptions = {
       const dbUser = await userModel.findOne({ email: user.email });
       if (account?.provider === "google") {
         if (!dbUser) {
-         await userModel.create({
+         const x = await userModel.create({
             name: profile?.name,
             email: profile?.email,
             image: profile?.picture,
           });
+          user._id = x._id;
         }
       }
       return true;

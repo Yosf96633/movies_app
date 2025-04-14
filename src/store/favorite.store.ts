@@ -15,20 +15,30 @@ interface FavoriteStore {
   checkFavorite: (tmdbID: string, mediaType: "movie" | "tv") => boolean;
 }
 
-export const useFavoriteStore = create<FavoriteStore>((set ,get)=>({
-     favorite : [],
-     setFavorites(items) {
-        get().favorite = items
-     },
-     addFavorite(item) {
-         set((state)=>({
-            favorite : [...state.favorite , item]
-         }))
-     },
-     removeFavorite(tmdbID, mediaType) {
-          get().favorite = get().favorite.filter((_ , i)=> !(tmdbID===_.tmdbID && mediaType ===_.mediaType))
-     },
-     checkFavorite(tmdbID, mediaType) {
-           return get().favorite?.some((_)=>(_.mediaType === mediaType && _.tmdbID ===tmdbID ))
-     },
-}))
+export const useFavoriteStore = create<FavoriteStore>((set, get) => ({
+  favorite: [],
+
+  setFavorites(items) {
+    set({favorite:items});
+  },
+
+  addFavorite(item) {
+    set((state) => ({
+      favorite: [...state.favorite, item],
+    }));
+  },
+
+  removeFavorite(tmdbID, mediaType) {
+    set((state) => ({
+      favorite: state.favorite.filter(
+        (fav) => !(fav.tmdbID === tmdbID && fav.mediaType === mediaType)
+      ),
+    }));
+  },
+
+  checkFavorite(tmdbID, mediaType) {
+    return get().favorite.some(
+      (fav) => fav.tmdbID === tmdbID && fav.mediaType === mediaType
+    );
+  },
+}));

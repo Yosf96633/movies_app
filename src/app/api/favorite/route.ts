@@ -8,7 +8,6 @@ export const GET = async (req: NextRequest) => {
   try {
     await connectDB();
     const session = await getServerSession(authOptions);
-    console.log(session)
     if (!session) {
       return NextResponse.json(
         { success: false, message: `Unauthenticated` },
