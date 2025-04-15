@@ -107,12 +107,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const response = await fetch(
     `${process.env.TMBD_BASE_URL as string}/tv/${id}?api_key=${
       process.env.API_KEY
-    }&language=en-US`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
+    }&language=en-US`
   );
   const data: TVShow = await response.json();
   return (

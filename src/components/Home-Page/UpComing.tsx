@@ -24,9 +24,7 @@ const UpComing = async () => {
       process.env.API_KEY as string
     }`,
     {
-      next: {
-        revalidate: 86400,
-      },
+       cache:"no-cache"
     }
   );
   const result = await response.json();

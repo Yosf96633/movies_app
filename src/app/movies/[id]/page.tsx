@@ -50,12 +50,8 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const response = await fetch(
     `${process.env.TMBD_BASE_URL as string}/movie/${id}?api_key=${
       process.env.API_KEY
-    }`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
+    }`
+
   );
   const data: Movie = await response.json();
   return (

@@ -22,11 +22,7 @@ const AiringTVShow = async () => {
     `${process.env.TMBD_BASE_URL as string}/tv/airing_today?api_key=${
       process.env.API_KEY as string
     }`,
-    {
-      next: {
-        revalidate: 86400,
-      },
-    }
+   {cache:"no-cache"}
   );
   const result = await response.json();
   const data: TvShow[] = result?.results || null;
