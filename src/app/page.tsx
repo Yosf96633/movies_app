@@ -5,6 +5,8 @@ import TrendingTVShow from "@/components/Home-Page/TrendingTVShow";
 import UpComing from "@/components/Home-Page/UpComing";
 import AiringTVShow from "@/components/Home-Page/OnAirTVShows";
 import FetchFavorite from "@/components/Home-Page/FetchFavorite";
+import TestimonialSection from "@/components/Home-Page/testimonial-section";
+import NewsletterSection from "@/components/Home-Page/newsletter-section";
 const page = async () => {
   return (
     <div className="">
@@ -14,6 +16,8 @@ const page = async () => {
       <TrendingTVShow />
       <UpComing />
       <AiringTVShow />
+      <TestimonialSection/>
+      <NewsletterSection/>
     </div>
   );
 };

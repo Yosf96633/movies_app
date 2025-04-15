@@ -14,17 +14,10 @@ interface Data {
 }
 
 export const Favorite = ({ items }: { items: Data[] }) => {
-  // Mock data for ratings and years (in a real app, these would come from your API)
-  const getRandomRating = () => (Math.floor(Math.random() * 50) + 50) / 10
-  const getRandomYear = () => Math.floor(Math.random() * 23) + 2000
-
   return (
     <div className="container mx-auto py-12 px-4">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {items.map((item) => {
-          const rating = getRandomRating()
-          const year = getRandomYear()
-
           return (
             <div
               key={item.tmdbID}
@@ -55,12 +48,6 @@ export const Favorite = ({ items }: { items: Data[] }) => {
                   )}
                 </div>
 
-                {/* Rating badge */}
-                <div className="absolute top-3 right-3 flex items-center gap-1 backdrop-blur-md bg-black/30 px-2 py-1 rounded-full">
-                  <Star className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
-                  <span className="text-xs font-bold text-white">{rating.toFixed(1)}</span>
-                </div>
-
                 {/* Favorite button */}
                 <Button
                   size="icon"
@@ -86,18 +73,6 @@ export const Favorite = ({ items }: { items: Data[] }) => {
                     {item.mediaType === "movie" ? "Movie" : "Series"}
                   </Badge>
                 </div>
-
-                <div className="text-xs text-gray-400 mb-3">
-                  {year} • {item.mediaType === "movie" ? "2h 15m" : "3 Seasons"}
-                </div>
-
-                {/* Progress bar to indicate watch progress */}
-                <div className="w-full h-1 bg-gray-700 rounded-full overflow-hidden">
-                  <div
-                    className={`h-full ${item.mediaType === "movie" ? "bg-rose-600" : "bg-cyan-600"}`}
-                    style={{ width: `${Math.random() * 100}%` }}
-                  ></div>
-                </div>
               </div>
 
               {/* Hover overlay with action button */}
@@ -106,7 +81,7 @@ export const Favorite = ({ items }: { items: Data[] }) => {
                 className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/40 opacity-0 group-hover:opacity-100 transition-all duration-300"
               >
                 <Button className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                  {item.mediaType === "movie" ? "Watch Movie" : "View Series"}
+                       View Details
                 </Button>
               </Link>
             </div>

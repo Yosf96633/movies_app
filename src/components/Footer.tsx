@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const Footer = () => {
@@ -18,12 +19,12 @@ const Footer = () => {
 
         {/* Navigation Links */}
         <div>
-          <h2 className="text-lg font-semibold text-white mb-3">Quick Links</h2>
+          <h2 className="text-lg font-semibold mb-3">Quick Links</h2>
           <ul className="space-y-2 text-sm">
-            <li><a href="/" className="hover:underline">Home</a></li>
-            <li><a href="/favorites" className="hover:underline">Favorites</a></li>
-            <li><a href="/trending" className="hover:underline">Trending</a></li>
-            <li><a href="/search" className="hover:underline">Search</a></li>
+            <li><Link href="/" className="hover:underline">Home</Link></li>
+            <li><Link href="/favorite" className="hover:underline">Favorites</Link></li>
+            <li><Link href="/trending" className="hover:underline">Trending</Link></li>
+            <li><Link href="/search" className="hover:underline">Search</Link></li>
           </ul>
         </div>
 
