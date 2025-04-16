@@ -31,8 +31,8 @@ const TrendingTVShow = async () => {
   const result = await response.json();
   const data: TVShow[] = result?.results || null;
   return (
-    <div className=" flex flex-col px-6 py-6 space-y-6">
-      <h1 className="  md:text-4xl text-3xl font-extrabold">Trending TV Shows</h1>
+    <div className=" flex flex-col md:px-6 px-2  py-6 space-y-6">
+      <h1 className="  md:text-4xl text-2xl font-extrabold">Trending TV Shows</h1>
       <div className=" flex overflow-x-auto w-full cursor-pointer py-4">
             {data.map((x:TVShow , i:number)=><div  key={i} className="w-[150px] shrink-0 mr-4 relative">
            <Link href={`/tvshows/${x.id}`}><div className="relative rounded-md overflow-hidden shadow-md">

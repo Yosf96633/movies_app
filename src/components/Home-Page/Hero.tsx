@@ -23,7 +23,7 @@ const Hero = async () => {
           love — all in one place.{" "}
         </p>
          <Link href={'/movies'}>
-         <Button className=" w-fit bg-white p-6 text-lg cursor-pointer mt-4 text-black">
+         <Button className=" w-fit bg-white p-6 max-md:p-3 text-lg max-md:text-sm cursor-pointer mt-4 text-black">
           Browser movies
         </Button>
          </Link>

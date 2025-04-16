@@ -37,7 +37,7 @@ export const useFavoriteStore = create<FavoriteStore>((set, get) => ({
   },
 
   checkFavorite(tmdbID, mediaType) {
-    return get().favorite.some(
+    return get().favorite?.some(
       (fav) => fav.tmdbID === tmdbID && fav.mediaType === mediaType
     );
   },

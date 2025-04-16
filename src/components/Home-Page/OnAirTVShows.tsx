@@ -27,8 +27,8 @@ const AiringTVShow = async () => {
   const result = await response.json();
   const data: TvShow[] = result?.results || null;
   return (
-    <div className=" flex flex-col px-6 py-6 space-y-6">
-      <h1 className=" md:text-4xl text-3xl font-extrabold">Airing TV Shows</h1>
+    <div className=" flex flex-col md:px-6 px-2 py-6 space-y-6">
+      <h1 className=" md:text-4xl text-2xl font-extrabold">Airing TV Shows</h1>
       <div className=" flex overflow-x-auto w-full cursor-pointer py-4">
         {data.map((x: TvShow, i: number) => (
           <div key={i} className="w-[150px] shrink-0 mr-4 relative">

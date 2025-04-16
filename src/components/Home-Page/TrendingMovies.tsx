@@ -30,8 +30,8 @@ const TrendingMovies = async () => {
   const result = await response.json();
   const data: Movie[] = result?.results || null;
   return (
-    <div className=" flex flex-col px-6 py-6 space-y-6">
-      <h1 className=" md:text-4xl text-3xl font-extrabold">Trending Movies</h1>
+    <div className=" flex flex-colmd:px-6 px-2  py-6 space-y-6">
+      <h1 className=" md:text-4xl text-2xl font-extrabold">Trending Movies</h1>
       <div className=" flex overflow-x-auto w-full cursor-pointer py-4">
         {data.map((x: Movie, i: number) => (
           <div key={i} className="w-[150px] shrink-0 mr-4 relative">
