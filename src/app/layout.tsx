@@ -6,7 +6,8 @@ import Navbar from "@/components/Navbar";
 import AuthProvider from "@/context/AuthProvider";
 import Footer from "@/components/Footer";
 export const metadata: Metadata = {
-  title: "Movie, Watch Movies Online, Watch TV Shows Online, free movie - Moviebox",
+  title:
+    "Movie, Watch Movies Online, Watch TV Shows Online, free movie - Moviebox",
   icons: {
     icon: "/favicon.svg",
   },
@@ -14,29 +15,30 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode;
+  modal: React.ReactNode;
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className=" relative">
-      
-      <AuthProvider>
-      <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-           <div className=" sticky top-0 z-10">
-           <Navbar/>
-           </div>
+        <AuthProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <div className=" sticky top-0 z-10">
+              <Navbar />
+            </div>
             {children}
-            <Footer/>
+            {modal}
+            <Footer />
             <Toaster />
-        </ThemeProvider>
-      </AuthProvider>
-     
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -41,6 +41,7 @@ export const FavButton = ({ title, tmdbID, mediaType, posterPath }: Props) => {
       } else {
         setIsFavorite(false);
       }
+      return
     } catch (error) {
       toast(`Something went wrong` , {action:{
         label: <X className=" bg-transparent" />,
@@ -73,6 +74,7 @@ export const FavButton = ({ title, tmdbID, mediaType, posterPath }: Props) => {
       } else {
         setIsFavorite(true);
       }
+      return
     } catch (error) {
       toast(`Something went wrong` ,  {
         action: {

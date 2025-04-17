@@ -74,12 +74,12 @@ export function MobileSidebar() {
             </div>}
           </div>
           {status === "authenticated" && (
-            <div className="flex items-center absolute bottom-0 space-x-2 py-8">
+            <div className="flex items-center absolute bottom-0 space-x-2 py-8 max-md:space-x-1">
               <Avatar className="h-10 w-10">
                 <AvatarImage src={session.user.image || ""} />
                 <AvatarFallback>{session.user.name?.charAt(0)}</AvatarFallback>
               </Avatar>
-              <h1 className="text-lg font-medium">{session.user.email}</h1>
+              <h1 className="text-lg font-medium max-md:text-sm max-md:font-light">{session.user.email}</h1>
               <div className="md:hidden self-end">
                 <ToggleMode/>
               </div>
