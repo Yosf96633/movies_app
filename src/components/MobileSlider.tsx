@@ -66,7 +66,7 @@ export function MobileSidebar() {
                   Login
                 </button>
               </Link>
-              <Link href="/register" onClick={handleNavClick}>
+              <Link href="/sign-up" onClick={handleNavClick}>
                 <button className="w-full py-2 px-4 rounded-md border mt-3 border-white hover:bg-black hover:text-white transition">
                   Sign Up
                 </button>
