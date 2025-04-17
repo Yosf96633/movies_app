@@ -55,7 +55,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   );
   const data: Movie = await response.json();
   return (
-    <div className="relative h-[100vh] max-md:h-[85vh] md:p-12 p-4 z-0">
+    <div className="relative min-h-[100vh] md:p-12 p-4 z-0">
       <div
         className="absolute inset-0 h-full z-10 bg-cover bg-center bg-no-repeat"
         style={{
@@ -63,7 +63,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
         }}
       />
       <div className=" bg-black/65 h-full absolute inset-0 z-[15]" />
-      <div className="relative flex flex-col top-24 z-20 text-white gap-6">
+      <div className="relative flex flex-col top-24 max-md:top-14 z-20 text-white gap-6">
         {/* Title */}
         <h1 className="text-5xl md:text-6xl font-extrabold drop-shadow-md">
           {data.title}

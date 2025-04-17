@@ -33,7 +33,7 @@ const page = async ({searchParams}:{
   
   return (
     <div className=' py-12 max-md:py-6 flex flex-col items-center-safe'>
-        <div className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-16 max-md:gap-6 px-1 md:px-4">
+        <div className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-16 max-md:gap-4 px-1 md:px-4">
         {data.map((x: Movie, i: number) => (
           <div key={i} className="md:w-[250px] w-[150px] shrink-0 relative">
             <Link href={`/movies/${x.id}`}>

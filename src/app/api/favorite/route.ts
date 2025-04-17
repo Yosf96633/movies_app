@@ -39,7 +39,6 @@ export const POST = async (req: NextRequest) => {
   try {
     await connectDB();
     const { tmdbID, mediaType, title, posterPath } = await req.json();
-    console.log(`Data: ${title}`);
     if (!tmdbID || !mediaType || !title || !posterPath) {
       return NextResponse.json(
         { success: false, message: `Fill all required fields` },
@@ -53,6 +52,7 @@ export const POST = async (req: NextRequest) => {
         { status: 401 }
       );
     }
+    console.log(session.user._id)
     const data = await favoriteModel.create({
       userID: session.user._id,
       tmdbID,
