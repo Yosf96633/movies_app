@@ -26,7 +26,7 @@ const page = () => {
         <p>No favorite found!</p>
       ) : (
         <>
-          <h1 className="text-center font-bold text-4xl mb-10">
+          <h1 className="text-center font-bold text-4xl">
             Your Favorites
           </h1>
           <Favorite items={data ?? []} />

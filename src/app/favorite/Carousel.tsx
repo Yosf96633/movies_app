@@ -29,7 +29,7 @@ export const Favorite = ({ items }: { items: Data[] }) => {
               {/* Poster image */}
               <div className="relative aspect-[2/3] w-full overflow-hidden">
                 <Image
-                   src={` https://image.tmdb.org/t/p/original${item.posterPath}` || `https://dummyjson.com/image/200x300/282828/ffffff?text=Poster+not+available`}
+                   src={`https://image.tmdb.org/t/p/original${item.posterPath}` || `https://dummyjson.com/image/200x300/282828/ffffff?text=Poster+not+available`}
                   alt={item.title}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
