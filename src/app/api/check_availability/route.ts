@@ -13,9 +13,7 @@ export const GET = async (req: NextRequest) => {
       );
     }
     const list = await userModel.find({ name });
-    console.log(list)
     const isInclude = list.some(x=>x.name===name)
-    console.log(isInclude)
     if (isInclude) {
       return NextResponse.json(
         { success: true, isIncluded: true },

@@ -15,19 +15,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  FormDescription
+  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Eye, EyeOff, LoaderCircle, X } from "lucide-react";
+import { Eye, EyeOff, Loader2, LoaderCircle, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import useDebounce from "@/hooks/useDebounce";
-
 const SignUpPage = () => {
   const [isShow, setIsShow] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
-   const [isExisted , setIsExisted] = useState<boolean>()
+  const [isExisted, setIsExisted] = useState<boolean>();
+  const [isCheckLoading, setIsCheckLoading] = useState<boolean>(false);
   const form = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
     defaultValues: {
@@ -36,26 +36,27 @@ const SignUpPage = () => {
       password: "",
     },
   });
-    const checkAvailability = async (name:string) => {
-         try {
-            const response = await fetch(`/api/check_availability?name=${name}` , {
-              method:"GET",
-            })
-            const result = await response.json()
-            console.log(result)
-            if(result.isIncluded){
-                setIsExisted(true)
-                return;
-            }
-            else{
-              setIsExisted(false)
-              return;
-            }
-         } catch (error) {
-          
-         }
+  const checkAvailability = async (name: string) => {
+    try {
+      setIsCheckLoading(true);
+      const response = await fetch(`/api/check_availability?name=${name}`, {
+        method: "GET",
+      });
+      const result = await response.json();
+      console.log(result);
+      if (result.isIncluded) {
+        setIsExisted(true);
+        return;
+      } else {
+        setIsExisted(false);
+        return;
+      }
+    } catch (error) {
+    } finally {
+      setIsCheckLoading(false);
     }
-   const debounced =  useDebounce(checkAvailability , 1000)
+  };
+  const debounced = useDebounce(checkAvailability, 1000);
   async function onSubmit(values: z.infer<typeof SignUpSchema>) {
     setIsLoading(true);
     try {
@@ -104,13 +105,16 @@ const SignUpPage = () => {
       setIsShow(false);
     };
   }, []);
-
+  const { watch } = form;
+  const name = watch("name");
   return (
     <div className="h-screen flex justify-center items-center max-md:h-[85vh] px-3">
       <div className="max-w-md w-full px-6 space-y-6 py-6 border rounded-2xl">
         <div className="flex flex-col items-center text-center">
           <h1 className="text-3xl font-bold">Welcome</h1>
-          <p className="text-muted-foreground">Create an account to get started</p>
+          <p className="text-muted-foreground">
+            Create an account to get started
+          </p>
         </div>
 
         <Form {...form}>
@@ -122,12 +126,32 @@ const SignUpPage = () => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="John Doe" {...field} onChange={(e)=>{
-                      field.onChange(e);
-                    debounced(e.target.value)
-                    }} />
+                    <Input
+                      placeholder="John Doe"
+                      {...field}
+                      onChange={(e) => {
+                        field.onChange(e);
+                        if (e.target.value.length >= 4) {
+                          debounced(e.target.value);
+                        }
+                      }}
+                    />
                   </FormControl>
-                  <FormDescription className={`text-sm ${isExisted ? "text-red-500" : "text-green-500"}`}>{isExisted ? "Username already exist!" : "Username is available"}</FormDescription>
+                  {name &&
+                    name.length >= 4 &&
+                    (isCheckLoading ? (
+                      <Loader2 size={10} className=" animate-spin"/>
+                    ) : (
+                      <FormDescription
+                        className={`text-sm ${
+                          isExisted ? "text-red-500" : "text-green-500"
+                        }`}
+                      >
+                        {isExisted
+                          ? "Username already exist!"
+                          : "Username is available"}
+                      </FormDescription>
+                    ))}
                   <FormMessage />
                 </FormItem>
               )}
@@ -206,7 +230,11 @@ const SignUpPage = () => {
           variant="outline"
           className="w-full flex items-center justify-center gap-2"
         >
-          <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <svg
+            className="w-5 h-5"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+          >
             <path
               d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
               fill="currentColor"
