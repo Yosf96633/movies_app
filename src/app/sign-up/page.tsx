@@ -15,17 +15,19 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Eye, EyeOff, LoaderCircle, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import useDebounce from "@/hooks/useDebounce";
 
 const SignUpPage = () => {
   const [isShow, setIsShow] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
-
+   const [isExisted , setIsExisted] = useState<boolean>()
   const form = useForm<z.infer<typeof SignUpSchema>>({
     resolver: zodResolver(SignUpSchema),
     defaultValues: {
@@ -34,7 +36,26 @@ const SignUpPage = () => {
       password: "",
     },
   });
-
+    const checkAvailability = async (name:string) => {
+         try {
+            const response = await fetch(`/api/check_availability?name=${name}` , {
+              method:"GET",
+            })
+            const result = await response.json()
+            console.log(result)
+            if(result.isIncluded){
+                setIsExisted(true)
+                return;
+            }
+            else{
+              setIsExisted(false)
+              return;
+            }
+         } catch (error) {
+          
+         }
+    }
+   const debounced =  useDebounce(checkAvailability , 1000)
   async function onSubmit(values: z.infer<typeof SignUpSchema>) {
     setIsLoading(true);
     try {
@@ -101,8 +122,12 @@ const SignUpPage = () => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="John Doe" {...field} />
+                    <Input placeholder="John Doe" {...field} onChange={(e)=>{
+                      field.onChange(e);
+                    debounced(e.target.value)
+                    }} />
                   </FormControl>
+                  <FormDescription className={`text-sm ${isExisted ? "text-red-500" : "text-green-500"}`}>{isExisted ? "Username already exist!" : "Username is available"}</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
